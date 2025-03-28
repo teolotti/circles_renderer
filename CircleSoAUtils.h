@@ -1,0 +1,14 @@
+//
+// Created by matteo on 28/03/25.
+//
+
+#ifndef CIRCLES_RENDERER_CIRCLESOAUTILS_H
+#define CIRCLES_RENDERER_CIRCLESOAUTILS_H
+
+
+class CircleSoAUtils {
+
+};
+
+
+#endif //CIRCLES_RENDERER_CIRCLESOAUTILS_H
