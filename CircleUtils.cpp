@@ -11,14 +11,15 @@ std::vector<Circle*> CircleUtils::generateCircles(int n) {
     std::vector<Circle*> circles;
 
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distributionXY(0.0, 100.0);
+    std::uniform_real_distribution<double> distributionX(0.0, width);
+    std::uniform_real_distribution<double> distributionY(0.0, height);
     std::uniform_real_distribution<double> distributionZ(0.0, 1.0);
-    std::uniform_real_distribution<double> distributionR(0.0, 10.0);
+    std::uniform_real_distribution<double> distributionR(10.0, 100.0);
     std::uniform_real_distribution<double> distributionRGB(0.0, 1.0);
 
     for (int i = 0; i < n; i++) {
-        double x = distributionXY(generator);
-        double y = distributionXY(generator);
+        double x = distributionX(generator);
+        double y = distributionY(generator);
         double z = distributionZ(generator);
         double r = distributionR(generator);
         double red = distributionRGB(generator);

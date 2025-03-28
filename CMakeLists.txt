@@ -8,5 +8,6 @@ find_package(OpenMP REQUIRED)
 add_executable(circles_renderer main.cpp
         Circle.h
         CircleUtils.cpp
-        CircleUtils.h)
+        CircleUtils.h
+        CircleSoA.h)
 target_link_libraries(circles_renderer OpenMP::OpenMP_CXX)
