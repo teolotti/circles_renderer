@@ -4,12 +4,14 @@
 #include <vector>
 #include <random>
 #include "Circle.h"
+#include "CircleSoA.h"
+#include "Utils.h"
 
 #ifndef CIRCLES_RENDERER_GENERATOR_H
 #define CIRCLES_RENDERER_GENERATOR_H
 
 
-class CircleUtils {
+class CircleUtils : public Utils {
 private:
     std::vector<std::vector<double>> imgR;
     std::vector<std::vector<double>> imgG;
@@ -18,6 +20,7 @@ private:
     int height;
     std::vector<Circle*> circles;
     const double alpha = 0.5;
+    int n;
 
 public:
     CircleUtils(int width, int height) : width(width), height(height) {
@@ -26,13 +29,10 @@ public:
         imgB = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
     }
 
-    std::vector<Circle*> generateCircles(int n);
-    void renderCircles(int n);
-    bool isInsideCircle(double px, double py, const Circle& c);
+    void generateCircles();
+    void renderCircles();
+    bool isInsideCircle(double px, double py, int index);
     void savePPM(const std::string& filename);
-
-
-
 
 };
 

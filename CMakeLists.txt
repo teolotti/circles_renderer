@@ -9,5 +9,8 @@ add_executable(circles_renderer main.cpp
         Circle.h
         CircleUtils.cpp
         CircleUtils.h
-        CircleSoA.h)
+        CircleSoA.h
+        CircleSoAUtils.cpp
+        CircleSoAUtils.h
+        Utils.h)
 target_link_libraries(circles_renderer OpenMP::OpenMP_CXX)

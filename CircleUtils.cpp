@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <fstream>
 
-std::vector<Circle*> CircleUtils::generateCircles(int n) {
+void CircleUtils::generateCircles() {
 
     std::vector<Circle*> circles;
 
@@ -17,7 +17,7 @@ std::vector<Circle*> CircleUtils::generateCircles(int n) {
     std::uniform_real_distribution<double> distributionR(10.0, 100.0);
     std::uniform_real_distribution<double> distributionRGB(0.0, 1.0);
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < this->n; i++) {
         double x = distributionX(generator);
         double y = distributionY(generator);
         double z = distributionZ(generator);
@@ -29,10 +29,9 @@ std::vector<Circle*> CircleUtils::generateCircles(int n) {
         circles.push_back(new Circle(x, y, z, r, red, green, blue));
     }
     this->circles = circles;
-    return circles;
 }
 
-void CircleUtils::renderCircles(int n) {
+void CircleUtils::renderCircles() {
     std::vector<Circle*> sortedCircles = this->circles;
     std::sort(sortedCircles.begin(), sortedCircles.end(), [](Circle* a, Circle* b) {
         return a->getZ() < b->getZ();
@@ -44,11 +43,12 @@ void CircleUtils::renderCircles(int n) {
             double py = y + 0.5;
 
             double r, g, b = 1.0;
-            for(auto c : sortedCircles) {
-                if(isInsideCircle(px, py, *c)) {
-                    r = this->alpha * c->getRed() + (1 - this->alpha) * r;
-                    g = this->alpha * c->getGreen() + (1 - this->alpha) * g;
-                    b = this->alpha * c->getBlue() + (1 - this->alpha) * b;
+            for(int i=0; i<sortedCircles.size(); i++) {
+                Circle* circle = sortedCircles[i];
+                if(isInsideCircle(px, py, i)) {
+                    r = circle->getRed();
+                    g = circle->getGreen();
+                    b = circle->getBlue();
                 }
             }
             imgR[x][y] = r;
@@ -57,10 +57,10 @@ void CircleUtils::renderCircles(int n) {
         }
     }
 }
-bool CircleUtils::isInsideCircle(double px, double py, const Circle &c) {
-    double dx = px - c.getX();
-    double dy = py - c.getY();
-    return dx * dx + dy * dy <= c.getR() * c.getR();
+bool CircleUtils::isInsideCircle(double px, double py, int index) {
+    double dx = px - circles[index]->getX();
+    double dy = py - circles[index]->getY();
+    return dx * dx + dy * dy <= circles[index]->getR() * circles[index]->getR();
 }
 
 void CircleUtils::savePPM(const std::string &filename) {
