@@ -12,7 +12,7 @@
 
 
 class CircleUtils : public Utils {
-private:
+protected:
     std::vector<std::vector<double>> imgR;
     std::vector<std::vector<double>> imgG;
     std::vector<std::vector<double>> imgB;

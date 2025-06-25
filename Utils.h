@@ -9,8 +9,8 @@
 
 class Utils {
 public:
-    virtual void generateCircles(int n) = 0;
-    virtual void renderCircles(int n) = 0;
+    virtual void generateCircles() = 0;
+    virtual void renderCircles() = 0;
     virtual bool isInsideCircle(double px, double py, int index) = 0;
     virtual void savePPM(const std::string& filename) = 0;
 };
