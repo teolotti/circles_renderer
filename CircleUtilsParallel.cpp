@@ -21,9 +21,9 @@ void CircleUtilsParallel::renderCircles() {
             for(int i = 0; i < sortedCircles.size(); i++) {
                 Circle* circle = sortedCircles[i];
                 if(isInsideCircle(px, py, i)) {
-                    r = circle->getRed();
-                    g = circle->getGreen();
-                    b = circle->getBlue();
+                    r = alpha * circle->getRed() + (1 - alpha) * r;
+                    g = alpha * circle->getGreen() + (1 - alpha) * g;
+                    b = alpha * circle->getBlue() + (1 - alpha) * b;
                 }
             }
             imgR[x][y] = r;

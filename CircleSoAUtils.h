@@ -19,8 +19,8 @@ private:
     double alpha = 0.5;
 
 public:
-    CircleSoAUtils(int width, int height) : width(width), height(height) {
-        circles = new CircleSoA(width * height);
+    CircleSoAUtils(int width, int height, int n) : width(width), height(height), n(n) {
+        circles = new CircleSoA(n);
     }
 
     ~CircleSoAUtils() {

@@ -23,7 +23,7 @@ protected:
     int n;
 
 public:
-    CircleUtils(int width, int height) : width(width), height(height) {
+    CircleUtils(int width, int height, int n) : width(width), height(height), n(n) {
         imgR = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
         imgG = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
         imgB = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));

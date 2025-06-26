@@ -19,7 +19,7 @@ class CircleUtilsParallel : public CircleUtils {
 //    const double alpha = 0.5;
 //    int n;
 public:
-    CircleUtilsParallel(int width, int height) : CircleUtils(width, height) {}
+    CircleUtilsParallel(int width, int height, int n) : CircleUtils(width, height, n) {}
 //        imgR = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
 //        imgG = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
 //        imgB = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
