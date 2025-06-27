@@ -29,10 +29,10 @@ public:
         imgB = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
     }
 
-    void generateCircles();
-    void renderCircles();
-    bool isInsideCircle(double px, double py, int index);
-    void savePPM(const std::string& filename);
+    void generateCircles() override;
+    void renderCircles() override;
+    bool isInsideCircle(double px, double py, int index) override;
+    void savePPM(const std::string& filename) override;
 
 };
 

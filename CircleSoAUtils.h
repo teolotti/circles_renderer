@@ -11,7 +11,10 @@
 
 
 class CircleSoAUtils : public Utils {
-private:
+protected:
+    std::vector<std::vector<double>> imgR;
+    std::vector<std::vector<double>> imgG;
+    std::vector<std::vector<double>> imgB;
     CircleSoA* circles;
     int width;
     int height;
@@ -21,16 +24,19 @@ private:
 public:
     CircleSoAUtils(int width, int height, int n) : width(width), height(height), n(n) {
         circles = new CircleSoA(n);
+        imgR = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
+        imgG = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
+        imgB = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
     }
 
     ~CircleSoAUtils() {
         delete circles;
     }
 
-    void generateCircles();
-    void renderCircles();
-    bool isInsideCircle(double px, double py, int index);
-    void savePPM(const std::string& filename);
+    void generateCircles() override;
+    void renderCircles() override;
+    bool isInsideCircle(double px, double py, int index) override;
+    void savePPM(const std::string& filename) override;
 
 };
 

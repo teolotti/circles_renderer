@@ -3,6 +3,8 @@
 //
 
 #include <algorithm>
+#include <iostream>
+#include <omp.h>
 #include "CircleUtilsParallel.h"
 
 void CircleUtilsParallel::renderCircles() {
@@ -10,6 +12,8 @@ void CircleUtilsParallel::renderCircles() {
     std::sort(sortedCircles.begin(), sortedCircles.end(), [](Circle* a, Circle* b) {
         return a->getZ() < b->getZ();
     });
+
+    double startTime = omp_get_wtime();
 
     #pragma omp parallel for collapse(2)
     for(int y = 0; y < this->height; y++) {
@@ -31,4 +35,6 @@ void CircleUtilsParallel::renderCircles() {
             imgB[x][y] = b;
         }
     }
+    double endTime = omp_get_wtime();
+    std::cout << "Rendering time - Parallel AoS: " << endTime - startTime << " seconds." << std::endl;
 }

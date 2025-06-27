@@ -14,4 +14,6 @@ public:
     virtual bool isInsideCircle(double px, double py, int index) = 0;
     virtual void savePPM(const std::string& filename) = 0;
 };
+
+
 #endif //CIRCLES_RENDERER_UTILS_H

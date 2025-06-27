@@ -82,6 +82,30 @@ public:
         return size;
     }
 
+    // Setters for the circle properties
+    void setX(int index, double value) {
+        x[index] = value;
+    }
+    void setY(int index, double value) {
+        y[index] = value;
+    }
+    void setZ(int index, double value) {
+        z[index] = value;
+    }
+    void setR(int index, double value) {
+        r[index] = value;
+    }
+    void setRed(int index, double value) {
+        red[index] = value;
+    }
+    void setGreen(int index, double value) {
+        green[index] = value;
+    }
+    void setBlue(int index, double value) {
+        blue[index] = value;
+    }
+
+
 };
 
 

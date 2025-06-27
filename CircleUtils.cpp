@@ -5,6 +5,8 @@
 #include "CircleUtils.h"
 #include <algorithm>
 #include <fstream>
+#include <omp.h>
+#include <iostream>
 
 void CircleUtils::generateCircles() {
 
@@ -37,6 +39,8 @@ void CircleUtils::renderCircles() {
         return a->getZ() < b->getZ();
     });
 
+    double startTime = omp_get_wtime();
+
     for(int y = 0; y < this->height; y++) {
         for(int x = 0; x < this->width; x++) {
             double px = x + 0.5;
@@ -56,6 +60,8 @@ void CircleUtils::renderCircles() {
             imgB[x][y] = b;
         }
     }
+    double endTime = omp_get_wtime();
+    std::cout << "Rendering time - Sequential AoS: " << endTime - startTime << " seconds." << std::endl;
 }
 bool CircleUtils::isInsideCircle(double px, double py, int index) {
     double dx = px - circles[index]->getX();
