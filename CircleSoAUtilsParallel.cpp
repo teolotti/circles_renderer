@@ -7,7 +7,39 @@
 #include <algorithm>
 #include <omp.h>
 #include <iostream>
+#include <random>
 #include "CircleSoAUtilsParallel.h"
+
+void CircleSoAUtilsParallel::generateCircles() {
+    std::default_random_engine generator;
+    std::uniform_real_distribution<double> distributionX(0.0, width);
+    std::uniform_real_distribution<double> distributionY(0.0, height);
+    std::uniform_real_distribution<double> distributionZ(0.0, 1.0);
+    std::uniform_real_distribution<double> distributionR(10.0, 100.0);
+    std::uniform_real_distribution<double> distributionRGB(0.0, 1.0);
+
+    #pragma omp parallel
+    {
+        #pragma omp for
+        for (int i = 0; i < this->n; i++) {
+            double x = distributionX(generator);
+            double y = distributionY(generator);
+            double z = distributionZ(generator);
+            double r = distributionR(generator);
+            double red = distributionRGB(generator);
+            double green = distributionRGB(generator);
+            double blue = distributionRGB(generator);
+
+            circles->setX(i, x);
+            circles->setY(i, y);
+            circles->setZ(i, z);
+            circles->setR(i, r);
+            circles->setRed(i, red);
+            circles->setGreen(i, green);
+            circles->setBlue(i, blue);
+        }
+    }
+}
 
 void CircleSoAUtilsParallel::renderCircles() {
     // Costruisce un array di indici ordinati per z crescente
@@ -18,8 +50,6 @@ void CircleSoAUtilsParallel::renderCircles() {
               [this](int a, int b) {
                   return circles->getZ(a) < circles->getZ(b);
               });
-
-    double startTime = omp_get_wtime();
 
     #pragma omp parallel for collapse(2)
     for (int y = 0; y < this->height; y++) {
@@ -40,6 +70,4 @@ void CircleSoAUtilsParallel::renderCircles() {
             imgB[x][y] = b;
         }
     }
-    double endTime = omp_get_wtime();
-    std::cout << "Rendering time - Parallel SoA: " << endTime - startTime << " seconds." << std::endl;
 }

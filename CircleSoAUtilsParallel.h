@@ -12,6 +12,7 @@ class CircleSoAUtilsParallel : public CircleSoAUtils {
 public:
     CircleSoAUtilsParallel(int width, int height, int n) : CircleSoAUtils(width, height, n) {}
 
+    void generateCircles() override;
     void renderCircles() override;
 };
 
