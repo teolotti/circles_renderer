@@ -40,8 +40,6 @@ void CircleSoAUtils::renderCircles() {
                   return circles->getZ(a) < circles->getZ(b);
               });
 
-    double startTime = omp_get_wtime();
-
     for (int y = 0; y < this->height; y++) {
         for (int x = 0; x < this->width; x++) {
             double px = x + 0.5;
@@ -60,8 +58,6 @@ void CircleSoAUtils::renderCircles() {
             imgB[x][y] = b;
         }
     }
-    double endTime = omp_get_wtime();
-    std::cout << "Rendering time - Sequential SoA: " << endTime - startTime << " seconds." << std::endl;
 }
 
 bool CircleSoAUtils::isInsideCircle(double px, double py, int index) {
