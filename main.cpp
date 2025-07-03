@@ -34,7 +34,7 @@ std::vector<times> sequentialAoSPipeline(int width, int height, int n) {
         circleUtils.renderCircles();
         double endTime = omp_get_wtime();
         if(i == 0) {
-            circleUtils.savePPM("output_AoS_sequential.ppm");
+            circleUtils.savePPM("../results/output_AoS_sequential.ppm");
         }
         elapsedTime += (endTime - startTime);
     }
@@ -58,7 +58,7 @@ std::vector<times> parallelAoSPipeline(int width, int height, int n) {
             circleUtils.renderCircles();
             double endTime = omp_get_wtime();
             if(i == 0 && j == 2) {
-                circleUtils.savePPM("output_AoS_parallel.ppm");
+                circleUtils.savePPM("../results/output_AoS_parallel.ppm");
             }
             elapsedTime += (endTime - startTime);
         }
@@ -79,7 +79,7 @@ std::vector<times> sequentialSoAPipeline(int width, int height, int n) {
         circleSoAUtils.renderCircles();
         double endTime = omp_get_wtime();
         if(i == 0) {
-            circleSoAUtils.savePPM("output_SoA_sequential.ppm");
+            circleSoAUtils.savePPM("../results/output_SoA_sequential.ppm");
         }
         elapsedTime += (endTime - startTime);
     }
@@ -103,7 +103,7 @@ std::vector<times> parallelSoAPipeline(int width, int height, int n) {
             circleSoAUtils.renderCircles();
             double endTime = omp_get_wtime();
             if(i == 0 && j == 2) {
-                circleSoAUtils.savePPM("output_SoA_parallel.ppm");
+                circleSoAUtils.savePPM("../results/output_SoA_parallel.ppm");
             }
             elapsedTime += (endTime - startTime);
         }
@@ -161,7 +161,7 @@ int main() {
     resultsSequential.insert(resultsSequential.end(), results.begin(), results.end());
     std::cout << "2000 SoA seq" << std::endl;
 
-    timesToCSV(resultsSequential, "results_sequential.csv");
+    timesToCSV(resultsSequential, "../results/results_sequential.csv");
 
     std::cout << "Sequential results saved to results_sequential.csv" << std::endl;
 
@@ -183,7 +183,7 @@ int main() {
     results = parallelSoAPipeline(width, height, 2000);
     resultsParallel.insert(resultsParallel.end(), results.begin(), results.end());
     std::cout << "2000 SoA parallel" << std::endl;
-    timesToCSV(resultsParallel, "results_parallel.csv");
+    timesToCSV(resultsParallel, "../results/results_parallel.csv");
     std::cout << "Parallel results saved to results_parallel.csv" << std::endl;
 
 

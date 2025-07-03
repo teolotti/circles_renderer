@@ -12,14 +12,14 @@
 
 void CircleSoAUtilsParallel::generateCircles() {
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distributionX(0.0, width);
-    std::uniform_real_distribution<double> distributionY(0.0, height);
-    std::uniform_real_distribution<double> distributionZ(0.0, 1.0);
-    std::uniform_real_distribution<double> distributionR(10.0, 100.0);
-    std::uniform_real_distribution<double> distributionRGB(0.0, 1.0);
-
-    #pragma omp parallel
+    #pragma omp parallel num_threads(omp_get_num_threads()) private(generator)
     {
+        std::uniform_real_distribution<double> distributionX(0.0, width);
+        std::uniform_real_distribution<double> distributionY(0.0, height);
+        std::uniform_real_distribution<double> distributionZ(0.0, 1.0);
+        std::uniform_real_distribution<double> distributionR(10.0, 100.0);
+        std::uniform_real_distribution<double> distributionRGB(0.0, 1.0);
+
         #pragma omp for
         for (int i = 0; i < this->n; i++) {
             double x = distributionX(generator);
