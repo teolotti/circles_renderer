@@ -11,8 +11,8 @@
 //render parallelo
 //SoA
 
-int const NUM_MEASUREMENTS = 30;
-int const MAX_THREADS = 12;
+int const NUM_MEASUREMENTS = 10; // Number of measurements to average
+int const MAX_THREADS = 20; // Maximum number of threads to use for parallel rendering
 
 
 struct times {
@@ -47,7 +47,7 @@ std::vector<times> sequentialAoSPipeline(int width, int height, int n) {
 std::vector<times> parallelAoSPipeline(int width, int height, int n) {
     std::vector<times> results;
 
-    for (int j= 2; j <= MAX_THREADS; j++) {
+    for (int j= 2; j <= MAX_THREADS; j+=2) {
         double elapsedTime = 0.0;
         omp_set_num_threads(j);
         std::cout << "Using " << j << " threads for parallel rendering." << std::endl;
@@ -92,7 +92,7 @@ std::vector<times> sequentialSoAPipeline(int width, int height, int n) {
 std::vector<times> parallelSoAPipeline(int width, int height, int n) {
     std::vector<times> results;
 
-    for (int j= 2; j <= MAX_THREADS; j++) {
+    for (int j= 2; j <= MAX_THREADS; j+=2) {
         double elapsedTime = 0.0;
         omp_set_num_threads(j);
         std::cout << "Using " << j << " threads for parallel rendering." << std::endl;
