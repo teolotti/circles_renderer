@@ -31,7 +31,7 @@ public:
 
     void generateCircles() override;
     void renderCircles() override;
-    bool isInsideCircle(double px, double py, int index) override;
+    bool isInsideCircleAoS(double px, double py, Circle* circle);
     void savePPM(const std::string& filename) override;
 
 };

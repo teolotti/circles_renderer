@@ -51,7 +51,7 @@ void CircleSoAUtilsParallel::renderCircles() {
                   return circles->getZ(a) < circles->getZ(b);
               });
 
-    #pragma omp parallel for collapse(2)
+    #pragma omp parallel for collapse(2) firstprivate(sortedIndices)
     for (int y = 0; y < this->height; y++) {
         for (int x = 0; x < this->width; x++) {
             double px = x + 0.5;
@@ -59,7 +59,10 @@ void CircleSoAUtilsParallel::renderCircles() {
 
             double r = 1.0, g = 1.0, b = 1.0;
             for (int i : sortedIndices) {
-                if (isInsideCircle(px, py, i)) {
+                double Cx = circles->getX(i);
+                double Cy = circles->getY(i);
+                double Cr = circles->getR(i);
+                if (isInsideCircleSoA(px, py, Cx, Cy, Cr)) {
                     r = alpha * circles->getRed(i) + (1 - alpha) * r;
                     g = alpha * circles->getGreen(i) + (1 - alpha) * g;
                     b = alpha * circles->getBlue(i) + (1 - alpha) * b;

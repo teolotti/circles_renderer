@@ -44,7 +44,7 @@ void CircleUtilsParallel::renderCircles() {
         return a->getZ() < b->getZ();
     });
 
-    #pragma omp parallel for collapse(2)
+    #pragma omp parallel for collapse(2) firstprivate(sortedCircles)
     for (int y = 0; y < this->height; y++) {
         for (int x = 0; x < this->width; x++) {
             double px = x + 0.5;
@@ -52,7 +52,7 @@ void CircleUtilsParallel::renderCircles() {
             double r = 1.0, g = 1.0, b = 1.0;
             for (int i = 0; i < sortedCircles.size(); i++) {
                 Circle *circle = sortedCircles[i];
-                if (isInsideCircle(px, py, i)) {
+                if (isInsideCircleAoS(px, py, circle)) {
                     r = alpha * circle->getRed() + (1 - alpha) * r;
                     g = alpha * circle->getGreen() + (1 - alpha) * g;
                     b = alpha * circle->getBlue() + (1 - alpha) * b;

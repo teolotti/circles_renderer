@@ -47,7 +47,10 @@ void CircleSoAUtils::renderCircles() {
 
             double r = 1.0, g = 1.0, b = 1.0;
             for (int i : sortedIndices) {
-                if (isInsideCircle(px, py, i)) {
+                double Cx = circles->getX(i);
+                double Cy = circles->getY(i);
+                double Cr = circles->getR(i);
+                if (isInsideCircleSoA(px, py, Cx, Cy, Cr)) {
                     r = alpha * circles->getRed(i) + (1 - alpha) * r;
                     g = alpha * circles->getGreen(i) + (1 - alpha) * g;
                     b = alpha * circles->getBlue(i) + (1 - alpha) * b;
@@ -60,10 +63,10 @@ void CircleSoAUtils::renderCircles() {
     }
 }
 
-bool CircleSoAUtils::isInsideCircle(double px, double py, int index) {
-    double dx = px - circles->getX(index);
-    double dy = py - circles->getY(index);
-    return (dx * dx + dy * dy) <= (circles->getR(index) * circles->getR(index));
+bool CircleSoAUtils::isInsideCircleSoA(double px, double py, double cx, double cy, double cr) {
+    double dx = px - cx;
+    double dy = py - cy;
+    return (dx * dx + dy * dy) <= (cr * cr);
 }
 
 void CircleSoAUtils::savePPM(const std::string &filename) {

@@ -35,7 +35,7 @@ public:
 
     void generateCircles() override;
     void renderCircles() override;
-    bool isInsideCircle(double px, double py, int index) override;
+    bool isInsideCircleSoA(double px, double py, double Cx, double Cy, double Cr);
     void savePPM(const std::string& filename) override;
 
 };

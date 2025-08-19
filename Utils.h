@@ -6,12 +6,12 @@
 #define CIRCLES_RENDERER_UTILS_H
 
 #include <string>
+#include "Circle.h"
 
 class Utils {
 public:
     virtual void generateCircles() = 0;
     virtual void renderCircles() = 0;
-    virtual bool isInsideCircle(double px, double py, int index) = 0;
     virtual void savePPM(const std::string& filename) = 0;
 };
 

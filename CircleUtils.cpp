@@ -46,7 +46,7 @@ void CircleUtils::renderCircles() {
             double r, g, b = 1.0;
             for(int i=0; i<sortedCircles.size(); i++) {
                 Circle* circle = sortedCircles[i];
-                if(isInsideCircle(px, py, i)) {
+                if(isInsideCircleAoS(px, py, circle)) {
                     r = alpha * circle->getRed() + (1 - alpha) * r;
                     g = alpha * circle->getGreen() + (1 - alpha) * g;
                     b = alpha * circle->getBlue() + (1 - alpha) * b;
@@ -58,10 +58,10 @@ void CircleUtils::renderCircles() {
         }
     }
 }
-bool CircleUtils::isInsideCircle(double px, double py, int index) {
-    double dx = px - circles[index]->getX();
-    double dy = py - circles[index]->getY();
-    return dx * dx + dy * dy <= circles[index]->getR() * circles[index]->getR();
+bool CircleUtils::isInsideCircleAoS(double px, double py, Circle* circle) {
+    double dx = px - circle->getX();
+    double dy = py - circle->getY();
+    return dx * dx + dy * dy <= circle->getR() * circle->getR();
 }
 
 void CircleUtils::savePPM(const std::string &filename) {
