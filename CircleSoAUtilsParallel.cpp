@@ -51,7 +51,7 @@ void CircleSoAUtilsParallel::renderCircles() {
                   return circles->getZ(a) < circles->getZ(b);
               });
 
-    #pragma omp parallel for collapse(2) firstprivate(sortedIndices)
+    #pragma omp parallel for collapse(2) schedule(static) firstprivate(sortedIndices)
     for (int y = 0; y < this->height; y++) {
         for (int x = 0; x < this->width; x++) {
             double px = x + 0.5;
